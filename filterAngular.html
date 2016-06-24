@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+ <style>
+ body { padding-top:50px; background-color:lightblue;}
+ table{
+    width: 800px;
+	height: 80px;
+    padding: 20px;
+    border: 2px solid navy;
+    margin: 10px;
+}
+
+input{width:800px; height:40px;}
+</style> 
+  <title>Filter with Angular</title>
+</head>
+<body>
+<div class="container" ng-app="sortApp" ng-controller="mainController" align="center">
+  <h1>
+  <div class="alert alert-info">
+    <p>Angular's way of Filter</p>
+
+  </div>
+  
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search using Filter" ng-model="searchFish">
+      </div>      
+    </div>
+  </form>
+  
+  <table class="table table-bordered table-striped">
+    
+    <thead>
+      <tr>
+        <td>
+          <a href="#" ng-click="sortType = 'word';>
+            Sushi Roll 
+            <span ng-show="sortType == 'word'" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'word'" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="roll in sushi | filter:searchFish">
+        <td>{{ roll.word }}</td>
+      </tr>
+    </tbody>
+    
+  </table>
+  </h1>
+</div>
+<script> 
+ angular.module('sortApp', [])
+
+.controller('mainController', function($scope) {
+  $scope.sortType     = 'word';    
+   
+  $scope.sushi = [
+    { word: '--> A true friend sees the 1st tear, catches the 2nd, and stops the 3rd'},
+    { word: '--> Each of us is called to do something in the name of love, to make sure that humanity comes to understand itself and is able to choose love over fear'},
+    { word: '--> Always pray to have eyes that see the best in people, a heart that forgives the worst, a mind that forgets the bad, and a soul that never loses faith in God.'},
+    { word: '--> There is no adversity capable of stopping you once the choice to persevere is made.'}
+  ];
+  
+});
+</script>
+</body>
+</html>
